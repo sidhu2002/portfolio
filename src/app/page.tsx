@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Github, Linkedin, Mail, ExternalLink, Send, Download, ViewIcon, View, Grid2X2, Grid3X3, GridIcon, LayoutGrid } from 'lucide-react';
+import { Github, Linkedin, Mail, ExternalLink, Send, Download, ViewIcon, View, Grid2X2, Grid3X3, GridIcon, LayoutGrid, ChevronLeft, ChevronRight } from 'lucide-react';
 import ParticlesComponent from './components/Particles';
 import Typewriter from 'typewriter-effect';
 import Tilt from 'react-parallax-tilt';
@@ -164,22 +164,24 @@ const swipePower = (offset: number, velocity: number) => {
 };
 
 export default function Home() {
-  const [[page, direction], setPage] = useState([0, 0]);
   const [gridView, setGridView] = useState(2);
-  const [currentGridPage, setCurrentGridPage] = useState(0);
+  const [page, setPage] = useState(0);
+  const [direction, setDirection] = useState(0);
   const [slideDirection, setSlideDirection] = useState(0);
+  const [currentGridPage, setCurrentGridPage] = useState(0);
   const projectsPerPage = 4;
   const totalGridPages = Math.ceil(projects.length / projectsPerPage);
 
   const paginate = (newDirection: number) => {
     const newPage = page + newDirection;
     if (newPage < 0) {
-      setPage([projects.length - 1, newDirection]);
+      setPage(projects.length - 1);
     } else if (newPage >= projects.length) {
-      setPage([0, newDirection]);
+      setPage(0);
     } else {
-      setPage([newPage, newDirection]);
+      setPage(newPage);
     }
+    setDirection(newDirection);
   };
 
   useEffect(() => {
@@ -220,7 +222,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="text-left">
               <h2 className="text-2xl text-primary mb-4">Hi There! 👋</h2>
-              <h1 className="heading text-4xl md:text-6xl font-bold mb-4 whitespace-nowrap">
+              <h1 className="heading text-4xl md:text-6xl font-bold mb-4 ">
                 I&apos;m K Siddeshwar Reddy
               </h1>
               <div className="text-xl md:text-2xl text-primary mb-6 h-[60px]">
@@ -372,7 +374,7 @@ export default function Home() {
               <div className="flex justify-between items-start mb-4">
                 <div>
                   <h3 className="text-xl font-bold text-secondary group-hover:text-primary transition-colors">Fullstack Intern</h3>
-                  <p className="text-primary">TRIBUILDER</p>
+                  <p className="text-primary">TRIPBUILDER</p>
                 </div>
                 <span className="text-primary">May 2024 - July 2024</span>
               </div>
@@ -387,12 +389,12 @@ export default function Home() {
               <div className="flex justify-between items-start mb-4">
                 <div>
                   <h3 className="text-xl font-bold text-secondary group-hover:text-primary transition-colors">Machine Learning Intern</h3>
-                  <p className="text-primary">GCE Research Center</p>
+                  <p className="text-primary">Research Center Imarat (RCI)</p>
                 </div>
                 <span className="text-primary">Oct 2022 - Jan 2023</span>
               </div>
               <ul className="list-disc list-inside text-secondary/80 space-y-2">
-                <li>Worked with the Research team to develop a cutting-edge 01/2023 image segmentation model.</li>
+                <li>Worked with the Research team to develop a cutting-edge  image segmentation model.</li>
                 <li>Model Training: Utilized Google Colab for efficient model training and experimentation.</li>
                 <li>Data Processing: Employed NumPy and pandas for data preprocessing and analysis.</li>
                 <li>Dataset Management: Used Roboflow for dataset augmentation and management, enhancing the model's performance.</li>
@@ -419,7 +421,7 @@ export default function Home() {
       {/* Projects Section */}
       <section id="projects" className="bg-dark-300 py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-dark-300 via-dark-200/50 to-dark-300"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent"></div>
+        <div className="absolute inset-0 bg-[radial-gradient-ellipse_at_center,_var(--tw-gradient-stops)] from-primary/5 via-transparent to-transparent"></div>
         
         <div className="section-container relative z-10">
           <div className="text-center mb-16">
@@ -440,7 +442,7 @@ export default function Home() {
                 title="Single View"
               >
                 <GridIcon className="w-5 h-5" />
-                <span>Single View</span>
+                <span className="hidden sm:inline">Single View</span>
               </button>
               <button
                 onClick={() => setGridView(2)}
@@ -452,52 +454,30 @@ export default function Home() {
                 title="Grid View"
               >
                 <Grid2X2 className="w-5 h-5" />
-                <span>Grid View</span>
+                <span className="hidden sm:inline">Grid View</span>
               </button>
             </div>
           </div>
           
           {gridView === 1 ? (
-            <div className="relative h-[600px] overflow-hidden">
-              <AnimatePresence initial={false} custom={direction}>
+            <div className="relative h-[600px] sm:h-[650px] overflow-hidden px-4 sm:px-0">
+              <AnimatePresence mode="wait">
                 <motion.div
                   key={page}
-                  custom={direction}
-                  variants={slideVariants}
-                  initial="enter"
-                  animate="center"
-                  exit="exit"
+                  initial={{ opacity: 0, x: direction > 0 ? 1000 : -1000 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: direction > 0 ? -1000 : 1000 }}
                   transition={{
                     x: { type: "spring", stiffness: 300, damping: 30 },
                     opacity: { duration: 0.2 }
                   }}
-                  drag="x"
-                  dragConstraints={{ left: 0, right: 0 }}
-                  dragElastic={1}
-                  onDragEnd={(e, { offset, velocity }) => {
-                    const swipe = swipePower(offset.x, velocity.x);
-
-                    if (swipe < -swipeConfidenceThreshold) {
-                      paginate(1);
-                    } else if (swipe > swipeConfidenceThreshold) {
-                      paginate(-1);
-                    }
-                  }}
                   className="absolute w-full"
                 >
-                  <Tilt
-                    tiltMaxAngleX={5}
-                    tiltMaxAngleY={5}
-                    scale={1}
-                    transitionSpeed={2000}
-                    className="h-full"
-                  >
-                    <ProjectCard {...projects[page]} />
-                  </Tilt>
+                  <ProjectCard {...projects[page]} />
                 </motion.div>
               </AnimatePresence>
 
-              {/* Carousel Navigation */}
+              {/* Navigation */}
               <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center justify-center gap-4">
                 <motion.button
                   whileHover={{ scale: 1.1 }}
@@ -505,26 +485,17 @@ export default function Home() {
                   onClick={() => paginate(-1)}
                   className="p-3 rounded-full bg-dark-200/80 text-secondary hover:bg-dark-100 transition-all duration-300 backdrop-blur-sm"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="m15 18-6-6 6-6" />
-                  </svg>
+                  <ChevronLeft className="w-6 h-6" />
                 </motion.button>
 
                 <div className="flex gap-2">
                   {projects.map((_, index) => (
                     <motion.button
                       key={index}
-                      onClick={() => setPage([index, page > index ? -1 : 1])}
+                      onClick={() => {
+                        setDirection(index > page ? 1 : -1);
+                        setPage(index);
+                      }}
                       whileHover={{ scale: 1.2 }}
                       whileTap={{ scale: 0.9 }}
                       className={`w-3 h-3 rounded-full transition-all duration-300 ${
@@ -542,32 +513,13 @@ export default function Home() {
                   onClick={() => paginate(1)}
                   className="p-3 rounded-full bg-dark-200/80 text-secondary hover:bg-dark-100 transition-all duration-300 backdrop-blur-sm"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="m9 18 6-6-6-6" />
-                  </svg>
+                  <ChevronRight className="w-6 h-6" />
                 </motion.button>
               </div>
-
-              {/* Progress Bar */}
-              <motion.div
-                className="absolute bottom-0 left-0 h-1 bg-primary"
-                initial={{ width: "0%" }}
-                animate={{ width: "100%" }}
-                transition={{ duration: 5, ease: "linear", repeat: Infinity }}
-              />
             </div>
           ) : (
-            <div className="relative">
+            // Grid View
+            <div className="relative px-4 sm:px-6 lg:px-8">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentGridPage}
@@ -578,7 +530,10 @@ export default function Home() {
                     x: { type: "spring", stiffness: 300, damping: 30 },
                     opacity: { duration: 0.2 }
                   }}
-                  className="grid grid-cols-2 lg:grid-cols-4 gap-6"
+                  className="grid gap-6 sm:gap-8"
+                  style={{
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))'
+                  }}
                 >
                   {getGridProjects().map((project, index) => (
                     <motion.div
@@ -586,16 +541,9 @@ export default function Home() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}
+                      className="w-full"
                     >
-                      <Tilt
-                        tiltMaxAngleX={5}
-                        tiltMaxAngleY={5}
-                        scale={1}
-                        transitionSpeed={2000}
-                        className="h-full"
-                      >
-                        <ProjectCard {...project} />
-                      </Tilt>
+                      <ProjectCard {...project} />
                     </motion.div>
                   ))}
                 </motion.div>
@@ -612,19 +560,7 @@ export default function Home() {
                   }}
                   className="p-3 rounded-full bg-dark-200/80 text-secondary hover:bg-dark-100 transition-all duration-300 backdrop-blur-sm"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="m15 18-6-6 6-6" />
-                  </svg>
+                  <ChevronLeft className="w-6 h-6" />
                 </motion.button>
 
                 <div className="flex gap-2">
@@ -655,19 +591,7 @@ export default function Home() {
                   }}
                   className="p-3 rounded-full bg-dark-200/80 text-secondary hover:bg-dark-100 transition-all duration-300 backdrop-blur-sm"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="m9 18 6-6-6-6" />
-                  </svg>
+                  <ChevronRight className="w-6 h-6" />
                 </motion.button>
               </div>
             </div>
