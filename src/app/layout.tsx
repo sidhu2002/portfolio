@@ -6,27 +6,27 @@ import Navbar from './components/Navbar';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'K Siddeshwar Reddy - Full Stack Developer Portfolio',
-  description: 'K Siddeshwar Reddy is a Full Stack Developer specializing in MERN stack, AWS, and mobile development. View my projects, skills, and experience.',
-  keywords: 'K Siddeshwar Reddy, Portfolio, Full Stack Developer, MERN Stack, AWS Developer, React Native Developer, Web Developer in Hyderabad',
+  title: 'K Siddeshwar Reddy - AI Engineer Portfolio',
+  description: 'K Siddeshwar Reddy is an AI Engineer specializing in LLMs, Agentic AI, RAG, and production ML systems. Building autonomous agents with Python, FastAPI, Gemini, Claude, and AWS.',
+  keywords: 'K Siddeshwar Reddy, AI Engineer, LLM Engineer, GenAI, Agentic AI, RAG, Vector Databases, Python, FastAPI, LangChain, LangGraph, MCP, Gemini, Claude, AWS Bedrock, pgvector, Pinecone, LLMOps, Hyderabad AI Engineer, Numerize AI',
   authors: [{ name: 'K Siddeshwar Reddy' }],
   creator: 'K Siddeshwar Reddy',
   publisher: 'K Siddeshwar Reddy',
-  metadataBase: new URL('https://k-siddeshwar-reddy.vercel.app'),
+  metadataBase: new URL('https://siddeshwar.com'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'K Siddeshwar Reddy - Full Stack Developer Portfolio',
-    description: 'K Siddeshwar Reddy is a Full Stack Developer specializing in MERN stack, AWS, and mobile development. View my projects, skills, and experience.',
-    url: 'https://k-siddeshwar-reddy.vercel.app',
+    title: 'K Siddeshwar Reddy - AI Engineer Portfolio',
+    description: 'K Siddeshwar Reddy is an AI Engineer specializing in LLMs, Agentic AI, RAG, and production ML systems. Building autonomous agents with Python, FastAPI, Gemini, Claude, and AWS.',
+    url: 'https://siddeshwar.com',
     siteName: 'K Siddeshwar Reddy Portfolio',
     images: [
       {
         url: '/1721486773846.jpg',
         width: 800,
         height: 600,
-        alt: 'K Siddeshwar Reddy - Full Stack Developer',
+        alt: 'K Siddeshwar Reddy - AI Engineer',
       },
     ],
     locale: 'en_US',
@@ -48,8 +48,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'K Siddeshwar Reddy - Full Stack Developer Portfolio',
-    description: 'K Siddeshwar Reddy is a Full Stack Developer specializing in MERN stack, AWS, and mobile development. View my projects, skills, and experience.',
+    title: 'K Siddeshwar Reddy - AI Engineer Portfolio',
+    description: 'K Siddeshwar Reddy is an AI Engineer specializing in LLMs, Agentic AI, RAG, and production ML systems. Building autonomous agents with Python, FastAPI, Gemini, Claude, and AWS.',
     creator: '@yourtwitterhandle',
     images: ['/1721486773846.jpg'],
   },

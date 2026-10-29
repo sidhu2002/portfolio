@@ -8,24 +8,30 @@ import Tilt from 'react-parallax-tilt';
 import {
   SiJavascript,
   SiTypescript,
-  SiDart,
+  SiPython,
   SiOpenjdk,
   SiReact,
   SiNextdotjs,
-  SiHtml5,
-  SiTailwindcss,
-  SiRedux,
+  SiFastapi,
   SiNodedotjs,
   SiExpress,
-  SiFlutter,
-  SiAndroidstudio,
-  SiMongodb,
   SiPostgresql,
-  SiMysql,
-  SiAwslambda,
-  SiGit,
+  SiRedis,
+  SiMongodb,
+  SiAmazon,
+  SiAmazondynamodb,
+  SiGooglecloud,
+  SiKubernetes,
   SiDocker,
-  SiAmazondynamodb
+  SiGit,
+  SiGithubactions,
+  SiOpenai,
+  SiHuggingface,
+  SiLangchain,
+  SiAnthropic,
+  SiGooglegemini,
+  SiMilvus,
+  SiPydantic
 } from 'react-icons/si';
 import { useState, useEffect, useRef } from 'react';
 import emailjs from '@emailjs/browser';
@@ -38,26 +44,42 @@ emailjs.init({
 
 const projects = [
   {
-    title: "CuisineHub",
-    description: "A comprehensive full-stack platform where users can register, login, search recipes, view detailed recipe information, and bookmark their favorites.",
-    tech: ['React', 'Express', 'Node.js', 'MongoDB', 'JWT'],
+    title: "DEXTER — Autonomous Document-Extraction Agent",
+    description: "Co-built at Numerize AI. Gemini 3 Pro agent with 13 tools via native function calling, sandboxed Docker execution, DDL-derived Pydantic validators, and procedural-memory RAG. Handles 500+ POS/bank/payout docs/day across Swiggy, Zomato, Petpooja, HDFC, ICICI with 97%+ structural accuracy. Cached scripts cut repeat-run latency ~70% and token cost ~85%.",
+    tech: ['Python', 'Gemini 3 Pro', 'google-genai', 'Pydantic', 'Docker', 'Postgres', 'RAG'],
     image: "/recipe.png",
     github: "https://github.com/sidhu2002",
     demo: "#"
   },
   {
-    title: "ShapeSync",
-    description: "A Workout Planner application with MERN stack for user registration, custom workout plans, and meal tracking.",
-    tech: ['React', 'Express', 'MongoDB', 'Node.js'],
+    title: "Onboarding + Daily Audit Agent",
+    description: "Autonomous data-audit agent on Claude Agent SDK (Opus 4.8). Every capability exposed over Model Context Protocol (MCP). Memory-as-files with SHA-256 integrity checks. Propose-only autonomy: the agent plans, investigates, and proposes findings with evidence — a human approves before any production write.",
+    tech: ['Python', 'Claude Agent SDK', 'Opus 4.8', 'MCP', 'Cloud Run', 'Postgres'],
     image: "/Screenshot 2024-12-05 191500.png",
     github: "https://github.com/sidhu2002",
     demo: "#"
   },
   {
-    title: "BlogApp",
-    description: "A feature-rich blogging app using the MERN stack with content management and CRUD functionality.",
-    tech: ['MongoDB', 'Express', 'React', 'Node.js'],
+    title: "Friday Concierge — Multi-tenant LLM Chat Platform",
+    description: "Contributed to a conversational-AI platform serving 20+ restaurant brands on FastAPI + Gemini with sub-second first-token SSE streaming, per-tenant Kubernetes isolation on GCP (one Service per tenant, RBAC-scoped), JWT tenant isolation, and schema-context injection for natural-language SQL over the frozen friday_mvp warehouse.",
+    tech: ['Python', 'FastAPI', 'Gemini', 'SSE', 'GKE', 'Postgres'],
     image: "/Screenshot 2024-12-05 191706.png",
+    github: "https://github.com/sidhu2002",
+    demo: "#"
+  },
+  {
+    title: "WhatsApp Financial Insights Bot",
+    description: "FastAPI service with embedding-based retrieval and vector similarity search over restaurant sales + reconciliation data. Delivers context-aware answers to 20+ enterprise restaurant clients over WhatsApp via Periskope with HMAC-signed webhooks.",
+    tech: ['Python', 'FastAPI', 'Embeddings', 'Vector Search', 'Webhooks'],
+    image: "/recipe.png",
+    github: "https://github.com/sidhu2002",
+    demo: "#"
+  },
+  {
+    title: "ApplyKit — AI Resume Tailor + ATS Scorer",
+    description: "Personal side project. Python CLI that scores a candidate profile against a JD, tailors a 1-page resume via Gemini + Jinja + headless Chrome PDF, and orchestrates batched applications. Ships ATS coverage reporting, honesty guardrails (disallow list), and application telemetry in SQLite.",
+    tech: ['Python', 'Gemini', 'Jinja', 'SQLite', 'MCP', 'CLI'],
+    image: "/Screenshot 2024-12-05 191500.png",
     github: "https://github.com/sidhu2002",
     demo: "#"
   }
@@ -66,76 +88,127 @@ const projects = [
 const iconComponents = {
   SiJavascript,
   SiTypescript,
-  SiDart,
+  SiPython,
   SiOpenjdk,
   SiReact,
   SiNextdotjs,
-  SiHtml5,
-  SiTailwindcss,
-  SiRedux,
+  SiFastapi,
   SiNodedotjs,
   SiExpress,
-  SiFlutter,
-  SiAndroidstudio,
-  SiMongodb,
   SiPostgresql,
-  SiMysql,
-  SiAwslambda,
-  SiGit,
+  SiRedis,
+  SiMongodb,
+  SiAmazon,
+  SiAmazondynamodb,
+  SiGooglecloud,
+  SiKubernetes,
   SiDocker,
-  SiAmazondynamodb
+  SiGit,
+  SiGithubactions,
+  SiOpenai,
+  SiHuggingface,
+  SiLangchain,
+  SiAnthropic,
+  SiGooglegemini,
+  SiMilvus,
+  SiPydantic
 };
 
 const skillsData = [
   {
-    title: "Languages",
+    title: "AI & LLMs",
     skills: [
-      { name: "JavaScript", icon: "SiJavascript" },
-      { name: "TypeScript", icon: "SiTypescript" },
-      { name: "Dart", icon: "SiDart" },
-      { name: "Java", icon: "SiOpenjdk" }
+      { name: "Gemini 3 Pro", icon: "SiGooglegemini" },
+      { name: "Claude Opus", icon: "SiAnthropic" },
+      { name: "OpenAI GPT", icon: "SiOpenai" },
+      { name: "AWS Bedrock", icon: "SiAmazon" },
+      { name: "MCP", icon: "SiAnthropic" },
+      { name: "HuggingFace", icon: "SiHuggingface" }
     ]
   },
   {
-    title: "Frontend",
+    title: "Agentic AI",
     skills: [
-      { name: "React", icon: "SiReact" },
-      { name: "Next.js", icon: "SiNextdotjs" },
-      { name: "HTML5", icon: "SiHtml5" },
-      { name: "Tailwind", icon: "SiTailwindcss" },
-      { name: "Redux", icon: "SiRedux" }
+      { name: "Autonomous Agents", icon: "SiPython" },
+      { name: "Function Calling", icon: "SiOpenai" },
+      { name: "Multi-Agent", icon: "SiAnthropic" },
+      { name: "Human-in-Loop", icon: "SiPython" },
+      { name: "Agent Eval", icon: "SiPydantic" },
+      { name: "Guardrails", icon: "SiPydantic" }
+    ]
+  },
+  {
+    title: "RAG & Vector DBs",
+    skills: [
+      { name: "RAG", icon: "SiPython" },
+      { name: "pgvector", icon: "SiPostgresql" },
+      { name: "Pinecone", icon: "SiMilvus" },
+      { name: "Qdrant", icon: "SiMilvus" },
+      { name: "Embeddings", icon: "SiOpenai" },
+      { name: "Hybrid Search", icon: "SiPython" }
+    ]
+  },
+  {
+    title: "AI Frameworks",
+    skills: [
+      { name: "LangChain", icon: "SiLangchain" },
+      { name: "LangGraph", icon: "SiLangchain" },
+      { name: "LlamaIndex", icon: "SiPython" },
+      { name: "Claude Agent SDK", icon: "SiAnthropic" },
+      { name: "Pydantic AI", icon: "SiPydantic" },
+      { name: "google-genai", icon: "SiGooglegemini" }
+    ]
+  },
+  {
+    title: "LLMOps & Eval",
+    skills: [
+      { name: "Langfuse", icon: "SiPython" },
+      { name: "Ragas", icon: "SiPython" },
+      { name: "LLM-as-Judge", icon: "SiOpenai" },
+      { name: "Prompt A/B", icon: "SiPython" },
+      { name: "Cost Tracking", icon: "SiPython" },
+      { name: "Drift Detection", icon: "SiPython" }
     ]
   },
   {
     title: "Backend",
     skills: [
+      { name: "Python", icon: "SiPython" },
+      { name: "TypeScript", icon: "SiTypescript" },
+      { name: "FastAPI", icon: "SiFastapi" },
       { name: "Node.js", icon: "SiNodedotjs" },
       { name: "Express", icon: "SiExpress" },
-      { name: "AWS HealthLake", icon: "SiAwslambda" },
-      { name: "DynamoDB", icon: "SiAmazondynamodb" }
+      { name: "Next.js", icon: "SiNextdotjs" }
     ]
   },
   {
-    title: "Mobile",
+    title: "Data & DBs",
     skills: [
-      { name: "React Native", icon: "SiReact" },
-      { name: "Flutter", icon: "SiFlutter" },
-      { name: "Android Studio", icon: "SiAndroidstudio" }
-    ]
-  },
-  {
-    title: "Database",
-    skills: [
-      { name: "MongoDB", icon: "SiMongodb" },
       { name: "PostgreSQL", icon: "SiPostgresql" },
-      { name: "MySQL", icon: "SiMysql" }
+      { name: "pgvector", icon: "SiPostgresql" },
+      { name: "DynamoDB", icon: "SiAmazondynamodb" },
+      { name: "Redis", icon: "SiRedis" },
+      { name: "MongoDB", icon: "SiMongodb" }
     ]
   },
   {
-    title: "DevOps & Tools",
+    title: "Cloud & DevOps",
     skills: [
-      { name: "Git", icon: "SiGit" },
-      { name: "Docker", icon: "SiDocker" }
+      { name: "AWS", icon: "SiAmazon" },
+      { name: "GCP", icon: "SiGooglecloud" },
+      { name: "Docker", icon: "SiDocker" },
+      { name: "Kubernetes", icon: "SiKubernetes" },
+      { name: "GH Actions", icon: "SiGithubactions" },
+      { name: "Git", icon: "SiGit" }
+    ]
+  },
+  {
+    title: "AI-Assisted Dev",
+    skills: [
+      { name: "Claude Code", icon: "SiAnthropic" },
+      { name: "Cursor", icon: "SiTypescript" },
+      { name: "Codex", icon: "SiOpenai" },
+      { name: "Copilot", icon: "SiGit" }
     ]
   }
 ];
@@ -186,11 +259,11 @@ export default function Home() {
 
   useEffect(() => {
     if (gridView !== 1) return;
-    
+
     const interval = setInterval(() => {
       paginate(1);
     }, 5000);
-    
+
     return () => clearInterval(interval);
   }, [gridView, page]);
 
@@ -201,14 +274,14 @@ export default function Home() {
 
   const nextGridPage = () => {
     setSlideDirection(1);
-    setCurrentGridPage((prev) => 
+    setCurrentGridPage((prev) =>
       prev === totalGridPages - 1 ? 0 : prev + 1
     );
   };
 
   const prevGridPage = () => {
     setSlideDirection(-1);
-    setCurrentGridPage((prev) => 
+    setCurrentGridPage((prev) =>
       prev === 0 ? totalGridPages - 1 : prev - 1
     );
   };
@@ -229,25 +302,28 @@ export default function Home() {
                 <Typewriter
                   options={{
                     strings: [
-                      'Full Stack Developer',
-                      'Mobile App Developer',
-                      'MERN Stack Developer',
-                      'AI Enthusiast'
+                      'AI Engineer',
+                      'LLM & Agentic AI Engineer',
+                      'RAG + Vector Search Engineer',
+                      'Python + FastAPI Backend Engineer'
                     ],
                     autoStart: true,
                     loop: true,
                   }}
                 />
               </div>
+              <p className="text-base md:text-lg text-secondary/80 mb-6 max-w-xl">
+                Building production LLM applications, autonomous agents, and agentic workflows. 2+ years shipping Python + FastAPI systems with Gemini, Claude, RAG, and MCP.
+              </p>
               <div className="flex flex-wrap gap-4 mb-8">
-                <a 
-                  href="mailto:k.siddeshwarreddy@gmail.com" 
+                <a
+                  href="mailto:k.siddeshwarreddy@gmail.com"
                   className="px-6 py-3 bg-primary hover:bg-primary/90 text-dark-300 rounded-full transition-all flex items-center gap-2"
                 >
                   <Mail className="w-5 h-5" />
                   Contact Me
                 </a>
-                <a 
+                <a
                   href="/K-SIDDESHWAR-REDDY-FlowCV-Resume-20241104 (1).pdf"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -256,8 +332,8 @@ export default function Home() {
                   <Download className="w-5 h-5" />
                   Download Resume
                 </a>
-                <a 
-                  href="#projects" 
+                <a
+                  href="#projects"
                   className="px-6 py-3 border border-primary text-primary hover:bg-primary/10 rounded-full transition-all"
                 >
                   View Projects
@@ -273,7 +349,7 @@ export default function Home() {
                   <Github className="w-6 h-6" />
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/siddeshwar-reddy-6310a624b/"
+                  href="https://www.linkedin.com/in/siddeshwar-reddy/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-secondary hover:text-primary transition-colors"
@@ -306,18 +382,16 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-4 text-secondary/80">
               <p>
-                I am a passionate Full Stack Developer with expertise in building scalable web and mobile applications.
-                My journey in software development has equipped me with a strong foundation in modern technologies and best practices.
+                I am an AI Engineer with 2+ years in production systems and 1+ year shipping production LLM applications on Gemini, Anthropic Claude, and AWS Bedrock using Python, TypeScript, FastAPI, and AI-assisted development with Claude Code.
               </p>
               <p>
-                I specialize in the MERN stack and have experience with cloud services like AWS. I have experience in
-                healthcare technology and building user-centric applications that make a difference.
+                I co-build autonomous agents with native tool calling, RAG, embeddings, Model Context Protocol (MCP), model-evaluation gates, guardrails, LLMOps telemetry, and human-in-the-loop escalation. I also led a 6-repo AWS migration with CI/CD release gating via GitHub Actions, per-tenant Kubernetes isolation, OAuth2/OIDC + RBAC, TLS/KMS encryption, and audit logging end-to-end.
               </p>
               <p>
-                When I'm not coding, I enjoy learning new technologies and contributing to open-source projects.
+                HIPAA-grade compliance background with GDPR working knowledge. Based in Hyderabad, India.
               </p>
               <div className="pt-4">
-                <a 
+                <a
                   href="/K-SIDDESHWAR-REDDY-FlowCV-Resume-20241104 (1).pdf"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -330,20 +404,20 @@ export default function Home() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="card">
-                <h3 className="text-3xl font-bold text-primary mb-2">1</h3>
-                <p className="text-secondary">Year of Experience</p>
+                <h3 className="text-3xl font-bold text-primary mb-2">2+</h3>
+                <p className="text-secondary">Years Experience</p>
               </div>
               <div className="card">
-                <h3 className="text-3xl font-bold text-primary mb-2">10+</h3>
-                <p className="text-secondary">Projects Completed</p>
+                <h3 className="text-3xl font-bold text-primary mb-2">1,000+</h3>
+                <p className="text-secondary">Agent Runs / day</p>
               </div>
               <div className="card">
-                <h3 className="text-3xl font-bold text-primary mb-2">5+</h3>
-                <p className="text-secondary">Happy Clients</p>
+                <h3 className="text-3xl font-bold text-primary mb-2">20+</h3>
+                <p className="text-secondary">Enterprise Tenants</p>
               </div>
               <div className="card">
-                <h3 className="text-3xl font-bold text-primary mb-2">10+</h3>
-                <p className="text-secondary">Technologies</p>
+                <h3 className="text-3xl font-bold text-primary mb-2">97%+</h3>
+                <p className="text-secondary">Extraction Accuracy</p>
               </div>
             </div>
           </div>
@@ -358,30 +432,33 @@ export default function Home() {
             <div className="card group bg-dark-200">
               <div className="flex justify-between items-start mb-4">
                 <div>
-                  <h3 className="text-xl font-bold text-secondary group-hover:text-primary transition-colors">Junior Developer</h3>
-                  <p className="text-primary">VECTORSOFT</p>
+                  <h3 className="text-xl font-bold text-secondary group-hover:text-primary transition-colors">AI Engineer</h3>
+                  <p className="text-primary">Numerize AI</p>
                 </div>
-                <span className="text-primary">Aug 2024 - present</span>
+                <span className="text-primary">Nov 2025 - Present</span>
               </div>
               <ul className="list-disc list-inside text-secondary/80 space-y-2">
-                <li>Developing scalable Healthcare Mobile/web applications with AWS and latest web technologies using FHIR format data.</li>
-                <li>Experience with cloud-based databases and healthcare data integration.</li>
-                <li>Developed Mobile and Desktop apps with AI and Zoom.us integration.</li>
+                <li>Co-built DEXTER, a Gemini 3 Pro-powered autonomous document-extraction agent with 13 tools via native function calling. Writes its own extraction code in a sandboxed Docker container, self-corrects against DDL-derived Pydantic validators, and handles 500+ POS/bank/payout docs/day with 97%+ structural accuracy.</li>
+                <li>Shipped procedural-memory RAG: validated extraction scripts cached by (channel, doc_type), retrieved on next run, re-validated in an ephemeral Postgres instance before any production write — cutting repeat-run latency ~70% and token cost ~85%.</li>
+                <li>Built the audit agent on Anthropic Claude Agent SDK (Opus 4.8) with every capability exposed over Model Context Protocol (MCP). Propose-only autonomy with human-in-the-loop gates and memory-as-files (SHA-256 integrity checks).</li>
+                <li>Engineered the model evaluation + safety layer: circuit breakers at 5 validation failures / 60 LLM turns / 15 stall turns, PII minimization, per-run token/cost/latency telemetry across 1,000+ runs/day, prompt A/B comparisons that cut regressions ~80%.</li>
+                <li>End-to-end owner of the AWS replica migration across 6 repos. Chose ECS Fargate over EKS (~40% lower ops surface), shipped the cutover in 5 weeks without disrupting GCP production. OAuth2/OIDC with AWS Cognito (4 pools), HMAC-signed webhooks, TLS/KMS encryption.</li>
               </ul>
             </div>
 
             <div className="card group bg-dark">
               <div className="flex justify-between items-start mb-4">
                 <div>
-                  <h3 className="text-xl font-bold text-secondary group-hover:text-primary transition-colors">Fullstack Intern</h3>
-                  <p className="text-primary">TRIPBUILDER</p>
+                  <h3 className="text-xl font-bold text-secondary group-hover:text-primary transition-colors">Associate Software Developer</h3>
+                  <p className="text-primary">VECTORSOFT</p>
                 </div>
-                <span className="text-primary">May 2024 - July 2024</span>
+                <span className="text-primary">Aug 2024 - Oct 2025</span>
               </div>
               <ul className="list-disc list-inside text-secondary/80 space-y-2">
-                <li>Developed a React video campaign app with carousels, popups, and responsive design.</li>
-                <li>Implemented Cross-Origin Resource Sharing for secure data sharing.</li>
-                <li>Seamlessly integrated APIs for integration and client requirements.</li>
+                <li>Architected a HIPAA-compliant healthcare platform on AWS (Cognito, DynamoDB, EC2, Route53) integrating DoseSpot e-prescribing over OAuth 2.0 + webhooks across 100+ endpoints.</li>
+                <li>Deployed AWS Cognito authN for 500+ concurrent users with RBAC and multi-tenant session isolation.</li>
+                <li>Executed clinic data migration for 15+ clinics from legacy EHR/EMR with validation pipelines ensuring zero data loss across 50,000+ patient records.</li>
+                <li>Shipped 5+ full-stack web/desktop apps on React, Next.js, TypeScript, React Native, and Tauri with Bun/Elysia backends.</li>
               </ul>
             </div>
 
@@ -389,15 +466,13 @@ export default function Home() {
               <div className="flex justify-between items-start mb-4">
                 <div>
                   <h3 className="text-xl font-bold text-secondary group-hover:text-primary transition-colors">Machine Learning Intern</h3>
-                  <p className="text-primary">Research Center Imarat (RCI)</p>
+                  <p className="text-primary">Research Centre Imarat (RCI)</p>
                 </div>
                 <span className="text-primary">Oct 2022 - Jan 2023</span>
               </div>
               <ul className="list-disc list-inside text-secondary/80 space-y-2">
-                <li>Worked with the Research team to develop a cutting-edge  image segmentation model.</li>
-                <li>Model Training: Utilized Google Colab for efficient model training and experimentation.</li>
-                <li>Data Processing: Employed NumPy and pandas for data preprocessing and analysis.</li>
-                <li>Dataset Management: Used Roboflow for dataset augmentation and management, enhancing the model's performance.</li>
+                <li>Trained a YOLOv7 image-segmentation model to 85% mAP on 5,000+ annotated images, with GPU-accelerated training on Google Colab.</li>
+                <li>Preprocessed 15,000+ images via Roboflow across 10+ augmentation techniques, lifting accuracy by 12%.</li>
               </ul>
             </div>
           </div>
@@ -422,21 +497,21 @@ export default function Home() {
       <section id="projects" className="bg-dark-300 py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-dark-300 via-dark-200/50 to-dark-300"></div>
         <div className="absolute inset-0 bg-[radial-gradient-ellipse_at_center,_var(--tw-gradient-stops)] from-primary/5 via-transparent to-transparent"></div>
-        
+
         <div className="section-container relative z-10">
           <div className="text-center mb-16">
             <h2 className="heading mb-4">Projects</h2>
             <p className="text-xl text-primary/80 max-w-2xl mx-auto mb-8">
-              Explore my latest works and side projects
+              Autonomous agents, LLM platforms, and agentic workflows I have built or contributed to
             </p>
-            
+
             {/* View Filter Buttons */}
             <div className="flex items-center justify-center gap-4 mb-8">
               <button
                 onClick={() => setGridView(1)}
                 className={`px-4 py-2 rounded-lg transition-all duration-300 flex items-center gap-2 ${
-                  gridView === 1 
-                    ? 'bg-primary text-dark-300' 
+                  gridView === 1
+                    ? 'bg-primary text-dark-300'
                     : 'bg-dark-200 text-secondary hover:bg-dark-100'
                 }`}
                 title="Single View"
@@ -447,8 +522,8 @@ export default function Home() {
               <button
                 onClick={() => setGridView(2)}
                 className={`px-4 py-2 rounded-lg transition-all duration-300 flex items-center gap-2 ${
-                  gridView === 2 
-                    ? 'bg-primary text-dark-300' 
+                  gridView === 2
+                    ? 'bg-primary text-dark-300'
                     : 'bg-dark-200 text-secondary hover:bg-dark-100'
                 }`}
                 title="Grid View"
@@ -458,7 +533,7 @@ export default function Home() {
               </button>
             </div>
           </div>
-          
+
           {gridView === 1 ? (
             <div className="relative h-[600px] sm:h-[650px] overflow-hidden px-4 sm:px-0">
               <AnimatePresence mode="wait">
@@ -499,8 +574,8 @@ export default function Home() {
                       whileHover={{ scale: 1.2 }}
                       whileTap={{ scale: 0.9 }}
                       className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                        page === index 
-                          ? 'bg-primary w-6' 
+                        page === index
+                          ? 'bg-primary w-6'
                           : 'bg-dark-200/80 hover:bg-dark-100'
                       }`}
                     />
@@ -574,8 +649,8 @@ export default function Home() {
                       whileHover={{ scale: 1.2 }}
                       whileTap={{ scale: 0.9 }}
                       className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                        currentGridPage === index 
-                          ? 'bg-primary w-6' 
+                        currentGridPage === index
+                          ? 'bg-primary w-6'
                           : 'bg-dark-200/80 hover:bg-dark-100'
                       }`}
                     />
@@ -604,7 +679,7 @@ export default function Home() {
         <div className="section-container">
           <h2 className="heading mb-8 text-center">Get In Touch</h2>
           <p className="text-xl text-primary mb-12 text-center max-w-2xl mx-auto">
-            I'm currently looking for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!
+            I'm currently open to AI Engineer / LLM Engineer roles. Whether you have a question or just want to say hi, I'll try my best to get back to you!
           </p>
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
@@ -625,8 +700,8 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-secondary">LinkedIn</h3>
-                  <a 
-                    href="https://www.linkedin.com/in/siddeshwar-reddy-6310a624b/"
+                  <a
+                    href="https://www.linkedin.com/in/siddeshwar-reddy/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-primary hover:text-primary/80 transition-colors"
@@ -641,7 +716,7 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-secondary">GitHub</h3>
-                  <a 
+                  <a
                     href="https://github.com/sidhu2002"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -682,7 +757,11 @@ function SkillCard({ title, skills }: SkillCardProps) {
               key={skill.name}
               className="flex flex-col items-center gap-2 p-3 rounded-lg bg-dark-200 hover:bg-dark-300 transition-all duration-300 group/skill"
             >
-              <Icon className="w-8 h-8 text-primary group-hover/skill:scale-110 transition-transform duration-300" />
+              {Icon ? (
+                <Icon className="w-8 h-8 text-primary group-hover/skill:scale-110 transition-transform duration-300" />
+              ) : (
+                <div className="w-8 h-8" />
+              )}
               <span className="text-xs text-secondary/80 group-hover/skill:text-primary transition-colors text-center">
                 {skill.name}
               </span>
@@ -715,10 +794,10 @@ function ProjectCard({
     <div className="group relative overflow-hidden rounded-xl bg-dark-200 p-1">
       <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
       <div className="absolute inset-0 bg-gradient-to-t from-dark-300/90 to-transparent"></div>
-      
+
       {/* Glowing border effect */}
       <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary/50 to-secondary/50 opacity-0 group-hover:opacity-100 blur-xl transition-all duration-500 group-hover:duration-200"></div>
-      
+
       <div className="relative bg-dark-200 rounded-lg p-4 h-full flex flex-col transition-transform duration-500 group-hover:scale-[0.99]">
         <div className="relative w-full h-48 mb-4 rounded-lg overflow-hidden">
           <Image
@@ -729,21 +808,21 @@ function ProjectCard({
           />
           <div className="absolute inset-0 bg-gradient-to-t from-dark-200 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
         </div>
-        
+
         <h3 className="text-xl font-bold text-secondary group-hover:text-primary transition-colors duration-300 mb-2">
           {title}
         </h3>
-        
+
         <p className="text-secondary/70 group-hover:text-secondary/90 transition-colors duration-300 mb-4 flex-grow">
           {description}
         </p>
-        
+
         <div className="space-y-4">
           <div className="flex flex-wrap gap-2">
             {tech.map((item) => (
               <span
                 key={item}
-                className="px-3 py-1 bg-dark-300/50 text-primary rounded-full text-sm border border-primary/20 
+                className="px-3 py-1 bg-dark-300/50 text-primary rounded-full text-sm border border-primary/20
                          backdrop-blur-sm transition-all duration-300
                          hover:border-primary/50 hover:bg-primary/10"
               >
@@ -751,7 +830,7 @@ function ProjectCard({
               </span>
             ))}
           </div>
-          
+
           <div className="flex gap-4 pt-2">
             <a
               href={github}
@@ -804,7 +883,7 @@ function ContactForm() {
         formRef.current,
         'hzZc8uRBtLlnW2aQ-'
       );
-      
+
       console.log('Success:', result.text);
       setSubmitStatus('success');
       setFormData({ from_name: '', from_email: '', message: '' });
